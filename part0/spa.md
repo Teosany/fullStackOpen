@@ -3,14 +3,7 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note right of browser: L'utilisateur écrit dans le champ et clique sur le bouton Submit
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-    activate server
-    Note left of server: Le serveur crée une nouvelle note et l'ajoute à la liste
-    server-->>browser: HTML 302 - redirect vers /notes
-    deactivate server
-    
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
     activate server
     server-->>browser: HTML document
     deactivate server
@@ -20,7 +13,7 @@ sequenceDiagram
     server-->>browser: the css file
     deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
     activate server
     server-->>browser: the JavaScript file
     deactivate server
