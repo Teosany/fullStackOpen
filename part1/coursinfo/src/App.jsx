@@ -1,27 +1,23 @@
 const Header = (props) => {
-    console.log(props)
     return (
         <h1>{props.course}</h1>
     )
 }
 const Content = (props) => {
-    console.log(props)
     return (
         <>
-            <Part part={props.part1} ex={props.ex1} />
-            <Part part={props.part2} ex={props.ex2} />
-            <Part part={props.part3} ex={props.ex3} />
+            <Part part={props.parts[0].name} ex={props.parts[0].exs}/>
+            <Part part={props.parts[1].name} ex={props.parts[1].exs}/>
+            <Part part={props.parts[2].name} ex={props.parts[2].exs}/>
         </>
     )
 }
 const Total = (props) => {
-    console.log(props)
     return (
-        <p>Number of exercises {props.ex1 + props.ex2 + props.ex3}</p>
+        <p>Number of exercises {props.parts[0].exs + props.parts[1].exs + props.parts[2].exs}</p>
     )
 }
 const Part = (props) => {
-    console.log(props)
     return (
         <p>{props.part} {props.ex}</p>
     )
@@ -30,25 +26,26 @@ const Part = (props) => {
 
 const App = () => {
     const course = 'Half Stack application development'
-
-    const part1 = {
-        name: 'Fundamentals of React',
-        exs: 10
-    }
-    const part2 = {
-        name: 'Using props to pass data',
-        exs: 7
-    }
-    const part3 = {
-        name: 'State of a component',
-        exs: 14
-    }
+    const parts = [
+        {
+            name: 'Fundamentals of React',
+            exs: 10
+        },
+        {
+            name: 'Using props to pass data',
+            exs: 7
+        },
+        {
+            name: 'State of a component',
+            exs: 14
+        }
+    ]
 
     return (
         <div>
-            <Header course={course}/>
-            <Content part1={part1.name} part2={part2.name} part3={part3.name} ex1={part1.exs} ex2={part2.exs} ex3={part3.exs}/>
-            <Total ex1={part1.exs} ex2={part2.exs} ex3={part3.exs}/>
+            <Header course={course} />
+            <Content parts={parts} />
+            <Total parts={parts} />
         </div>
     )
 }
