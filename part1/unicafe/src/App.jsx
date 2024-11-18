@@ -10,6 +10,22 @@ const Button = ({handleClick, name}) => (
 
 const Stat = ({stat, nb}) => <div>{stat} {nb}</div>
 
+const Statistics = ({good, neutral, bad, all}) => {
+    if (all > 0) {
+        return (
+            <div>
+                <Stat stat={'good'} nb={good}/>
+                <Stat stat={'neutral'} nb={neutral}/>
+                <Stat stat={'bad'} nb={bad}/>
+                <Stat stat={'all'} nb={all}/>
+                <Stat stat={'average'} nb={all > 0 ? (good - bad) / all : 0}/>
+                <Stat stat={'positive'} nb={good > 0 ? ((good / all) * 100) + ' %' : '0 %'}/>
+            </div>
+        )
+    }
+    return <div>No feedback given</div>
+}
+
 function App() {
     const [good, setGood] = useState(0)
     const [neutral, setNeutral] = useState(0)
@@ -23,12 +39,7 @@ function App() {
             <Button name={'neutral'} handleClick={() => setNeutral(neutral + 1)}/>
             <Button name={'bad'} handleClick={() => setBad(bad + 1)}/>
             <Title text={'statistics'}/>
-            <Stat stat={'good'} nb={good}/>
-            <Stat stat={'neutral'} nb={neutral}/>
-            <Stat stat={'bad'} nb={bad}/>
-            <Stat stat={'all'} nb={all}/>
-            <Stat stat={'average'} nb={all > 0 ? (good - bad) / all : 0}/>
-            <Stat stat={'positive'} nb={good > 0 ? ((good / all) * 100) + ' %' : '0 %'}/>
+            <Statistics good={good} neutral={neutral} bad={bad} all={all}/>
         </div>
     )
 }
