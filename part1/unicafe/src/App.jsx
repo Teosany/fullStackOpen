@@ -8,22 +8,41 @@ const Button = ({handleClick, text}) => (
     </button>
 )
 
-const StatisticLine = ({text, value}) => <div>{text} {value}</div>
+const StatisticLine = ({text, value}) => (
+    <tr>
+        <td>
+            {text}
+        </td>
+        <td>
+            {value}
+        </td>
+    </tr>
+)
 
 const Statistics = ({good, neutral, bad, all}) => {
     if (all > 0) {
         return (
-            <div>
-                <StatisticLine text={'good'} value={good}/>
-                <StatisticLine text={'neutral'} value={neutral}/>
-                <StatisticLine text={'bad'} value={bad}/>
-                <StatisticLine text={'all'} value={all}/>
-                <StatisticLine text={'average'} value={(good - bad) / all}/>
-                <StatisticLine text={'positive'} value={((good / all) * 100) + ' %'}/>
-            </div>
+            <>
+                <Title text={'statistics'}/>
+                <table>
+                    <tbody>
+                    <StatisticLine text={'good'} value={good}/>
+                    <StatisticLine text={'neutral'} value={neutral}/>
+                    <StatisticLine text={'bad'} value={bad}/>
+                    <StatisticLine text={'all'} value={all}/>
+                    <StatisticLine text={'average'} value={(good - bad) / all}/>
+                    <StatisticLine text={'positive'} value={((good / all) * 100) + ' %'}/>
+                    </tbody>
+                </table>
+            </>
         )
     }
-    return <div>No feedback given</div>
+    return (
+        <>
+            <Title text={'statistics'}/>
+            <div>No feedback given</div>
+        </>
+    )
 }
 
 function App() {
@@ -38,7 +57,6 @@ function App() {
             <Button text={'good'} handleClick={() => setGood(good + 1)}/>
             <Button text={'neutral'} handleClick={() => setNeutral(neutral + 1)}/>
             <Button text={'bad'} handleClick={() => setBad(bad + 1)}/>
-            <Title text={'statistics'}/>
             <Statistics good={good} neutral={neutral} bad={bad} all={all}/>
         </div>
     )
